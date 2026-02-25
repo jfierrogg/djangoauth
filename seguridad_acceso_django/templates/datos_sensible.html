@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="alert alert-warning shadow-sm" role="alert">
+    <h4 class="alert-heading">¡Zona Restringida!</h4>
+    <p>Si puedes ver esto, es porque tienes el <strong>PermissionRequiredMixin</strong> configurado correctamente en la base de datos.</p>
+    <hr>
+    <p class="mb-0">Solo usuarios con el permiso específico pueden visualizar este contenido.</p>
+</div>
+<a href="{% url 'home' %}" class="btn btn-secondary">Volver al inicio</a>
+{% endblock %}

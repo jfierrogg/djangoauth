@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="p-5 mb-4 bg-light border rounded-3">
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Bienvenido al Panel</h1>
+        <p class="col-md-8 fs-4">Has iniciado sesión correctamente. Tu acceso está siendo gestionado por el <strong>LoginRequiredMixin</strong>.</p>
+        <hr class="my-4">
+        <p>Prueba el control de permisos haciendo clic abajo:</p>
+        <a href="{% url 'datos_sensibles' %}" class="btn btn-success btn-lg">Zona de Administración</a>
+    </div>
+</div>
+{% endblock %}
