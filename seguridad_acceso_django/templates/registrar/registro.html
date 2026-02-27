@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-header bg-success text-white">
+                <h4 class="mb-0">Crear Nueva Cuenta</h4>
+            </div>
+            <div class="card-body">
+                <form method="post" id="registrationForm">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <hr>
+                    <button type="submit" class="btn btn-success w-100">Registrarme</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll('input[type="password"]').forEach((passInput, index) => {
+      
+        const group = document.createElement('div');
+        group.className = 'input-group mb-3';
+        
+        const btn = document.createElement('button');
+        btn.className = 'btn btn-outline-secondary';
+        btn.type = 'button';
+        btn.innerHTML = '<i class="bi bi-eye"></i>';
+        
+        passInput.parentNode.insertBefore(group, passInput);
+        group.appendChild(passInput);
+        group.appendChild(btn);
+        
+        passInput.classList.add('form-control');
+
+        btn.addEventListener('click', () => {
+            const type = passInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passInput.setAttribute('type', type);
+            btn.innerHTML = type === 'password' ? '<i class="bi bi-eye"></i>' : '<i class="bi bi-eye-slash"></i>';
+        });
+    });
+</script>
+{% endblock %}

@@ -1,12 +1,57 @@
 {% extends 'base.html' %}
+
 {% block content %}
-<div class="p-5 mb-4 bg-light border rounded-3">
-    <div class="container-fluid py-5">
-        <h1 class="display-5 fw-bold">Bienvenido al Panel</h1>
-        <p class="col-md-8 fs-4">Has iniciado sesión correctamente. Tu acceso está siendo gestionado por el <strong>LoginRequiredMixin</strong>.</p>
-        <hr class="my-4">
-        <p>Prueba el control de permisos haciendo clic abajo:</p>
-        <a href="{% url 'datos_sensibles' %}" class="btn btn-success btn-lg">Zona de Administración</a>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-body p-5">
+                    <h1 class="display-5 fw-bold text-dark mb-3">Bienvenido al Panel</h1>
+                    <p class="lead text-muted">
+                        Has iniciado sesión correctamente como <strong>{{ user.username }}</strong>. 
+                        Tu acceso está siendo gestionado por el <strong>LoginRequiredMixin</strong>.
+                    </p>
+                    
+                    <hr class="my-4">
+
+                    <div class="mt-4">
+                        {% if user.is_staff %}
+                            <div class="alert alert-success border-0 shadow-sm d-flex align-items-center" role="alert">
+                                <i class="bi bi-shield-check-fill fs-4 me-3"></i>
+                                <div>
+                                    <strong>Modo Administrador Activo:</strong> 
+                                    Tienes privilegios para gestionar usuarios y acceder a las tablas del modelo Auth.
+                                </div>
+                            </div>
+                            
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-start mt-4">
+                                <a href="{% url 'datos_sensibles' %}" class="btn btn-success btn-lg px-4 shadow-sm">
+                                    <i class="bi bi-people-fill me-2"></i> Zona de Administración
+                                </a>
+                            </div>
+
+                        {% else %}
+                            <div class="alert alert-warning border-0 shadow-sm d-flex align-items-center" role="alert">
+                                <i class="bi bi-exclamation-triangle-fill fs-4 me-3"></i>
+                                <div>
+                                    <strong>Acceso Restringido:</strong> 
+                                    Tu cuenta no tiene los permisos necesarios para ver datos sensibles o gestionar usuarios.
+                                </div>
+                            </div>
+                            
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-start mt-4">
+                                <button class="btn btn-secondary btn-lg px-4 shadow-sm" disabled>
+                                    <i class="bi bi-lock-fill me-2"></i> Zona Restringida
+                                </button>
+                            </div>
+                            <p class="text-muted mt-3 small italic">
+                                * Si necesitas acceso, por favor contacta con el superusuario del sistema.
+                            </p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

@@ -19,6 +19,7 @@ from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from cuentas.views import HomeView, AdminDataView 
+from cuentas.views import RegistroUsuarioView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,7 +27,8 @@ urlpatterns = [
     
     path('', HomeView.as_view(), name='home'), 
     
-    path('login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
+    path('login/', auth_views.LoginView.as_view(template_name='registrar/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('protegido/', AdminDataView.as_view(), name='datos_sensibles'),
+    path('registro/', RegistroUsuarioView.as_view(), name='registro'),
 ]
